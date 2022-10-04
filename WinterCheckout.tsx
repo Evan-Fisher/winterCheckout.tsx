@@ -11,6 +11,7 @@ const WinterCheckout: React.FC<{
   brandImage?: string;
   production?: boolean;
   fillSource?: string;
+  orderSource?: string;
   onClose?: () => void;
   onSuccess?: (txId: string, email: string) => void;
 }> = ({
@@ -25,6 +26,7 @@ const WinterCheckout: React.FC<{
   brandImage,
   production,
   fillSource,
+  orderSource,
   onClose,
   onSuccess,
 }) => {
@@ -78,6 +80,9 @@ const WinterCheckout: React.FC<{
     if (fillSource) {
       queryString += `&fillSource=` + fillSource;
     }
+    if (orderSource) {
+      queryString += `&orderSource=` + orderSource;
+    }
 
     const url = production
       ? "https://production-marketplace-nft-checkout.onrender.com/?" +
@@ -95,12 +100,14 @@ const WinterCheckout: React.FC<{
     title,
     erc1155Video,
     brandImage,
+    orderSource,
+    fillSource,
   ]);
 
   return showModal ? (
     <div
       dangerouslySetInnerHTML={{
-        __html: `<iframe id="winter-checkout" src="${projectUrl}" style="color-scheme: light; position: fixed; top: 0px; bottom: 0px; right: 0px; width: 100%; border: none; margin: 0px; padding: 0px; overflow: hidden; z-index: 999999; height: 100%;" />`,
+        __html: `<iframe id="winter-checkout" src="${projectUrl}" style="position: fixed; top: 0px; bottom: 0px; right: 0px; width: 100%; border: none; margin: 0px; padding: 0px; overflow: hidden; z-index: 999999; height: 100%;" />`,
       }}
     />
   ) : (
