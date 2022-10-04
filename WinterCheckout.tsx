@@ -7,8 +7,6 @@ const WinterCheckout: React.FC<{
   walletAddress?: string;
   email?: string;
   mintQuantity?: number;
-  title?: string;
-  brandImage?: string;
   production?: boolean;
   fillSource?: string;
   orderSource?: string;
@@ -21,9 +19,6 @@ const WinterCheckout: React.FC<{
   walletAddress,
   email,
   mintQuantity,
-  erc1155Video,
-  title,
-  brandImage,
   production,
   fillSource,
   orderSource,
@@ -68,15 +63,6 @@ const WinterCheckout: React.FC<{
     if (mintQuantity) {
       queryString += "&mintQuantity=" + mintQuantity;
     }
-    if (erc1155Video) {
-      queryString += "&erc1155Video=" + erc1155Video;
-    }
-    if (title) {
-      queryString += "&title=" + title;
-    }
-    if (brandImage) {
-      queryString += `&brandImage=${encodeURIComponent(brandImage)}`;
-    }
     if (fillSource) {
       queryString += `&fillSource=` + fillSource;
     }
@@ -97,9 +83,6 @@ const WinterCheckout: React.FC<{
     walletAddress,
     email,
     mintQuantity,
-    title,
-    erc1155Video,
-    brandImage,
     orderSource,
     fillSource,
   ]);
@@ -115,4 +98,23 @@ const WinterCheckout: React.FC<{
   );
 };
 
-export default WinterCheckout;
+// How to implement the component
+
+function BuyPage() {
+  const [showWinterModal, setShowWinterModal] = useState(false);
+  return (
+    <div>
+      <WinterCheckout
+        showModal={showWinterModal}
+        contractAddress={"0xef2d92168835eb485d79733a0274fc5866025c17"}
+        tokenId={"134"}
+        production={true}
+        orderSource={"x2y2.io"}
+        fillSource={"x2y2.io"}
+        onClose={() => {
+          setShowWinterModal(false);
+        }}
+      />
+    </div>
+  );
+}
